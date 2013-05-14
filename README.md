@@ -1,6 +1,6 @@
-# Wcs
+# Ruby/WCS
 
-TODO: Write a gem description
+WCSTools wrapper for Ruby
 
 ## Installation
 
@@ -18,7 +18,6 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
 
 ## Contributing
 
