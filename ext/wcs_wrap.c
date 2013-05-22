@@ -2204,7 +2204,7 @@ SWIGINTERN void WorldCoor_wcseqset(struct WorldCoor *self,double equinox){
 SWIGINTERN void WorldCoor_setwcslin(struct WorldCoor *self,int mode){
       setwcslin(self,mode);
     }
-SWIGINTERN int WorldCoor_wcszout(struct WorldCoor *self,struct WorldCoor *wcs){
+SWIGINTERN int WorldCoor_wcszout(struct WorldCoor *self){
       return wcszout(self);
     }
 static swig_class SwigClassDistort;
@@ -9015,8 +9015,6 @@ _wrap_WorldCoor_wcscdset(int argc, VALUE *argv, VALUE self) {
   double *arg2 = (double *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
   
   if ((argc < 1) || (argc > 1)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
@@ -9026,14 +9024,31 @@ _wrap_WorldCoor_wcscdset(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(res1), Ruby_Format_TypeError( "", "struct WorldCoor *","wcscdset", 1, self )); 
   }
   arg1 = (struct WorldCoor *)(argp1);
-  res2 = SWIG_ConvertPtr(argv[0], &argp2,SWIGTYPE_p_double, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), Ruby_Format_TypeError( "", "double *","wcscdset", 2, argv[0] )); 
+  {
+    if (NIL_P(argv[0])) {
+      arg2 = (double *)0;
+    } else {
+      /* Get the length of the List */
+      int size = RARRAY_LEN(argv[0]);
+      int i;
+      /* Get the first element in memory */
+      VALUE *ptr = RARRAY_PTR(argv[0]);
+      arg2 = (double *)malloc((size+1)*sizeof(double));
+      for (i=0; i < size; i++, ptr++) {
+        /* Convert Ruby Object String to char* */
+        arg2[i] = NUM2DBL(*ptr);
+      }
+    }
   }
-  arg2 = (double *)(argp2);
   WorldCoor_wcscdset(arg1,arg2);
+  {
+    free(arg2);
+  }
   return Qnil;
 fail:
+  {
+    free(arg2);
+  }
   return Qnil;
 }
 
@@ -9355,8 +9370,6 @@ _wrap_WorldCoor_wcsreset(int argc, VALUE *argv, VALUE self) {
   int ecode7 = 0 ;
   double val8 ;
   int ecode8 = 0 ;
-  void *argp9 = 0 ;
-  int res9 = 0 ;
   int result;
   VALUE vresult = Qnil;
   
@@ -9403,15 +9416,32 @@ _wrap_WorldCoor_wcsreset(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(ecode8), Ruby_Format_TypeError( "", "double","wcsreset", 8, argv[6] ));
   } 
   arg8 = (double)(val8);
-  res9 = SWIG_ConvertPtr(argv[7], &argp9,SWIGTYPE_p_double, 0 |  0 );
-  if (!SWIG_IsOK(res9)) {
-    SWIG_exception_fail(SWIG_ArgError(res9), Ruby_Format_TypeError( "", "double *","wcsreset", 9, argv[7] )); 
+  {
+    if (NIL_P(argv[7])) {
+      arg9 = (double *)0;
+    } else {
+      /* Get the length of the List */
+      int size = RARRAY_LEN(argv[7]);
+      int i;
+      /* Get the first element in memory */
+      VALUE *ptr = RARRAY_PTR(argv[7]);
+      arg9 = (double *)malloc((size+1)*sizeof(double));
+      for (i=0; i < size; i++, ptr++) {
+        /* Convert Ruby Object String to char* */
+        arg9[i] = NUM2DBL(*ptr);
+      }
+    }
   }
-  arg9 = (double *)(argp9);
   result = (int)WorldCoor_wcsreset(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
   vresult = SWIG_From_int((int)(result));
+  {
+    free(arg9);
+  }
   return vresult;
 fail:
+  {
+    free(arg9);
+  }
   return Qnil;
 }
 
@@ -9477,28 +9507,20 @@ fail:
 SWIGINTERN VALUE
 _wrap_WorldCoor_wcszout(int argc, VALUE *argv, VALUE self) {
   struct WorldCoor *arg1 = (struct WorldCoor *) 0 ;
-  struct WorldCoor *arg2 = (struct WorldCoor *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
   int result;
   VALUE vresult = Qnil;
   
-  if ((argc < 1) || (argc > 1)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
+  if ((argc < 0) || (argc > 0)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 0)",argc); SWIG_fail;
   }
   res1 = SWIG_ConvertPtr(self, &argp1,SWIGTYPE_p_WorldCoor, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), Ruby_Format_TypeError( "", "struct WorldCoor *","wcszout", 1, self )); 
   }
   arg1 = (struct WorldCoor *)(argp1);
-  res2 = SWIG_ConvertPtr(argv[0], &argp2,SWIGTYPE_p_WorldCoor, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), Ruby_Format_TypeError( "", "struct WorldCoor *","wcszout", 2, argv[0] )); 
-  }
-  arg2 = (struct WorldCoor *)(argp2);
-  result = (int)WorldCoor_wcszout(arg1,arg2);
+  result = (int)WorldCoor_wcszout(arg1);
   vresult = SWIG_From_int((int)(result));
   return vresult;
 fail:
@@ -9719,50 +9741,6 @@ _wrap_setwcsfile(int argc, VALUE *argv, VALUE self) {
   return Qnil;
 fail:
   if (alloc1 == SWIG_NEWOBJ) free((char*)buf1);
-  return Qnil;
-}
-
-
-SWIGINTERN VALUE
-_wrap_cpwcs(int argc, VALUE *argv, VALUE self) {
-  char **arg1 = (char **) 0 ;
-  char *arg2 = (char *) 0 ;
-  int res2 ;
-  char *buf2 = 0 ;
-  int alloc2 = 0 ;
-  int result;
-  VALUE vresult = Qnil;
-  
-  if ((argc < 2) || (argc > 2)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 2)",argc); SWIG_fail;
-  }
-  {
-    int size;
-    char *str;
-    char *buf;
-    size = RSTRING_LEN(argv[0]);
-    str = StringValuePtr(argv[0]);
-    buf = (char*)malloc(size+1);
-    strncpy(buf, str, size);
-    arg1 = &(buf);
-  }
-  res2 = SWIG_AsCharPtrAndSize(argv[1], &buf2, NULL, &alloc2);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), Ruby_Format_TypeError( "", "char *","cpwcs", 2, argv[1] ));
-  }
-  arg2 = (char *)(buf2);
-  result = (int)cpwcs(arg1,arg2);
-  vresult = SWIG_From_int((int)(result));
-  {
-    free(*arg1);
-  }
-  if (alloc2 == SWIG_NEWOBJ) free((char*)buf2);
-  return vresult;
-fail:
-  {
-    free(*arg1);
-  }
-  if (alloc2 == SWIG_NEWOBJ) free((char*)buf2);
   return Qnil;
 }
 
@@ -10398,8 +10376,6 @@ _wrap_wcscstr(int argc, VALUE *argv, VALUE self) {
   int arg2 ;
   double arg3 ;
   double arg4 ;
-  char temp1 ;
-  int res1 = SWIG_TMPOBJ ;
   int val2 ;
   int ecode2 = 0 ;
   double val3 ;
@@ -10408,7 +10384,9 @@ _wrap_wcscstr(int argc, VALUE *argv, VALUE self) {
   int ecode4 = 0 ;
   VALUE vresult = Qnil;
   
-  arg1 = &temp1;
+  {
+    arg1 = malloc(64);
+  }
   if ((argc < 3) || (argc > 3)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc); SWIG_fail;
   }
@@ -10428,14 +10406,17 @@ _wrap_wcscstr(int argc, VALUE *argv, VALUE self) {
   } 
   arg4 = (double)(val4);
   wcscstr(arg1,arg2,arg3,arg4);
-  if (SWIG_IsTmpObj(res1)) {
-    vresult = SWIG_Ruby_AppendOutput(vresult, SWIG_From_char((*arg1)));
-  } else {
-    int new_flags = SWIG_IsNewObj(res1) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
-    vresult = SWIG_Ruby_AppendOutput(vresult, SWIG_NewPointerObj((void*)(arg1), SWIGTYPE_p_char, new_flags));
+  {
+    vresult = rb_str_new2(arg1);
+  }
+  {
+    free(arg1);
   }
   return vresult;
 fail:
+  {
+    free(arg1);
+  }
   return Qnil;
 }
 
@@ -10452,11 +10433,13 @@ _wrap_d2v3(int argc, VALUE *argv, VALUE self) {
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
+  VALUE vresult = Qnil;
   
-  if ((argc < 4) || (argc > 4)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc); SWIG_fail;
+  {
+    arg4 = malloc(sizeof(double)*3);
+  }
+  if ((argc < 3) || (argc > 3)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc); SWIG_fail;
   }
   ecode1 = SWIG_AsVal_double(argv[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
@@ -10473,14 +10456,21 @@ _wrap_d2v3(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(ecode3), Ruby_Format_TypeError( "", "double","d2v3", 3, argv[2] ));
   } 
   arg3 = (double)(val3);
-  res4 = SWIG_ConvertPtr(argv[3], &argp4,SWIGTYPE_p_double, 0 |  0 );
-  if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), Ruby_Format_TypeError( "", "double [3]","d2v3", 4, argv[3] )); 
-  } 
-  arg4 = (double *)(argp4);
   d2v3(arg1,arg2,arg3,arg4);
-  return Qnil;
+  {
+    vresult = rb_ary_new();
+    rb_ary_push(vresult, rb_float_new(arg4[0]));
+    rb_ary_push(vresult, rb_float_new(arg4[1]));
+    rb_ary_push(vresult, rb_float_new(arg4[2]));
+  }
+  {
+    free(arg4);
+  }
+  return vresult;
 fail:
+  {
+    free(arg4);
+  }
   return Qnil;
 }
 
@@ -10497,11 +10487,13 @@ _wrap_s2v3(int argc, VALUE *argv, VALUE self) {
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
+  VALUE vresult = Qnil;
   
-  if ((argc < 4) || (argc > 4)) {
-    rb_raise(rb_eArgError, "wrong # of arguments(%d for 4)",argc); SWIG_fail;
+  {
+    arg4 = malloc(sizeof(double)*3);
+  }
+  if ((argc < 3) || (argc > 3)) {
+    rb_raise(rb_eArgError, "wrong # of arguments(%d for 3)",argc); SWIG_fail;
   }
   ecode1 = SWIG_AsVal_double(argv[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
@@ -10518,14 +10510,21 @@ _wrap_s2v3(int argc, VALUE *argv, VALUE self) {
     SWIG_exception_fail(SWIG_ArgError(ecode3), Ruby_Format_TypeError( "", "double","s2v3", 3, argv[2] ));
   } 
   arg3 = (double)(val3);
-  res4 = SWIG_ConvertPtr(argv[3], &argp4,SWIGTYPE_p_double, 0 |  0 );
-  if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), Ruby_Format_TypeError( "", "double [3]","s2v3", 4, argv[3] )); 
-  } 
-  arg4 = (double *)(argp4);
   s2v3(arg1,arg2,arg3,arg4);
-  return Qnil;
+  {
+    vresult = rb_ary_new();
+    rb_ary_push(vresult, rb_float_new(arg4[0]));
+    rb_ary_push(vresult, rb_float_new(arg4[1]));
+    rb_ary_push(vresult, rb_float_new(arg4[2]));
+  }
+  {
+    free(arg4);
+  }
+  return vresult;
 fail:
+  {
+    free(arg4);
+  }
   return Qnil;
 }
 
@@ -10536,8 +10535,6 @@ _wrap_v2d3(int argc, VALUE *argv, VALUE self) {
   double *arg2 = (double *) 0 ;
   double *arg3 = (double *) 0 ;
   double *arg4 = (double *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
   double temp2 ;
   int res2 = SWIG_TMPOBJ ;
   double temp3 ;
@@ -10552,11 +10549,12 @@ _wrap_v2d3(int argc, VALUE *argv, VALUE self) {
   if ((argc < 1) || (argc > 1)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_double, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), Ruby_Format_TypeError( "", "double [3]","v2d3", 1, argv[0] )); 
-  } 
-  arg1 = (double *)(argp1);
+  {
+    arg1 = malloc(sizeof(double)*3);
+    arg1[0] = NUM2DBL(RARRAY_PTR(argv[0])[0]);
+    arg1[1] = NUM2DBL(RARRAY_PTR(argv[0])[2]);
+    arg1[2] = NUM2DBL(RARRAY_PTR(argv[0])[2]);
+  }
   v2d3(arg1,arg2,arg3,arg4);
   vresult = rb_ary_new();
   if (SWIG_IsTmpObj(res2)) {
@@ -10577,8 +10575,14 @@ _wrap_v2d3(int argc, VALUE *argv, VALUE self) {
     int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
     vresult = SWIG_Ruby_AppendOutput(vresult, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
   }
+  {
+    free(arg1);
+  }
   return vresult;
 fail:
+  {
+    free(arg1);
+  }
   return Qnil;
 }
 
@@ -10589,8 +10593,6 @@ _wrap_v2s3(int argc, VALUE *argv, VALUE self) {
   double *arg2 = (double *) 0 ;
   double *arg3 = (double *) 0 ;
   double *arg4 = (double *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
   double temp2 ;
   int res2 = SWIG_TMPOBJ ;
   double temp3 ;
@@ -10605,11 +10607,12 @@ _wrap_v2s3(int argc, VALUE *argv, VALUE self) {
   if ((argc < 1) || (argc > 1)) {
     rb_raise(rb_eArgError, "wrong # of arguments(%d for 1)",argc); SWIG_fail;
   }
-  res1 = SWIG_ConvertPtr(argv[0], &argp1,SWIGTYPE_p_double, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), Ruby_Format_TypeError( "", "double [3]","v2s3", 1, argv[0] )); 
-  } 
-  arg1 = (double *)(argp1);
+  {
+    arg1 = malloc(sizeof(double)*3);
+    arg1[0] = NUM2DBL(RARRAY_PTR(argv[0])[0]);
+    arg1[1] = NUM2DBL(RARRAY_PTR(argv[0])[2]);
+    arg1[2] = NUM2DBL(RARRAY_PTR(argv[0])[2]);
+  }
   v2s3(arg1,arg2,arg3,arg4);
   vresult = rb_ary_new();
   if (SWIG_IsTmpObj(res2)) {
@@ -10630,8 +10633,14 @@ _wrap_v2s3(int argc, VALUE *argv, VALUE self) {
     int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
     vresult = SWIG_Ruby_AppendOutput(vresult, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
   }
+  {
+    free(arg1);
+  }
   return vresult;
 fail:
+  {
+    free(arg1);
+  }
   return Qnil;
 }
 
@@ -11262,7 +11271,6 @@ SWIGEXPORT void Init_wcs(void) {
   rb_define_module_function(mWcs, "getdefwcs", _wrap_getdefwcs, -1);
   rb_define_module_function(mWcs, "wcszin", _wrap_wcszin, -1);
   rb_define_module_function(mWcs, "setwcsfile", _wrap_setwcsfile, -1);
-  rb_define_module_function(mWcs, "cpwcs", _wrap_cpwcs, -1);
   rb_define_module_function(mWcs, "savewcscoor", _wrap_savewcscoor, -1);
   rb_define_module_function(mWcs, "getwcscoor", _wrap_getwcscoor, -1);
   rb_define_module_function(mWcs, "wcsconv", _wrap_wcsconv, -1);

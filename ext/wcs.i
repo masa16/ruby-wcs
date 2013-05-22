@@ -244,6 +244,26 @@ typedef int BOOLEAN;
       wcsrange($self,ora1,ora2,odec1,odec2);
     }
 
+%typemap(in) double *cd {
+    if (NIL_P($input)) {
+        $1 = (double *)0;
+    } else {
+        /* Get the length of the List */
+        int size = RARRAY_LEN($input);
+        int i;
+        /* Get the first element in memory */
+        VALUE *ptr = RARRAY_PTR($input);
+        $1 = (double *)malloc((size+1)*sizeof(double));
+        for (i=0; i < size; i++, ptr++) {
+            /* Convert Ruby Object String to char* */
+            $1[i] = NUM2DBL(*ptr);
+        }
+    }
+ }
+%typemap(freearg) double *cd {
+  free($1);
+ }
+
     void wcscdset(      /* Set scaling and rotation from CD matrix */
         double *cd)     /* CD matrix, ignored if NULL */
     {
@@ -333,8 +353,7 @@ typedef int BOOLEAN;
       setwcslin($self,mode);
     }
 
-    int wcszout (       /* Return coordinate in third dimension */
-        struct WorldCoor *wcs)  /* World coordinate system structure */
+    int wcszout ()      /* Return coordinate in third dimension */
     {
       return wcszout($self);
     }
@@ -376,23 +395,25 @@ typedef int BOOLEAN;
     void setwcsfile(    /* Set filename for WCS error message */
         char *filename); /* FITS or IRAF file name */
 
-%typemap(in) char **header {
-  int size;
-  char *str;
-  char *buf;
-  size = RSTRING_LEN($input);
-  str = StringValuePtr($input);
-  buf = (char*)malloc(size+1);
-  strncpy(buf, str, size);
-  $1 = &(buf);
- }
 
-%typemap(freearg) char **header {
-  free(*$1);
- }
-    int cpwcs (         /* Copy WCS keywords with no suffix to ones with suffix */
-        char **header,  /* Pointer to start of FITS header */
-        char *cwcs);    /* Keyword suffix character for output WCS */
+//%typemap(in) char **header {
+//  int size;
+//  char *str;
+//  char *buf;
+//  size = RSTRING_LEN($input);
+//  str = StringValuePtr($input);
+//  buf = (char*)malloc(size+1);
+//  strncpy(buf, str, size);
+//  $1 = &(buf);
+//  puts("pass 1");
+// }
+//
+//%typemap(freearg) char **header {
+//  free(*$1);
+// }
+//    int cpwcs (         /* Copy WCS keywords with no suffix to ones with suffix */
+//        char **header,  /* Pointer to start of FITS header */
+//        char *cwcs);    /* Keyword suffix character for output WCS */
 
     void savewcscoor(   /* Save output coordinate system */
         char *wcscoor); /* coordinate system (J2000, B1950, galactic) */
@@ -480,29 +501,68 @@ typedef int BOOLEAN;
 %apply char *OUTPUT {
   char   *cstr
  }
+%typemap(in,numinputs=0) char *cstr {
+  $1 = malloc(64);
+ }
+%typemap(argout) char *cstr {
+  $result = rb_str_new2($1);
+ }
+%typemap(freearg) char *cstr {
+  free($1);
+ }
 
     void wcscstr (      /* Set coordinate system type string from system and equinox */
-        char   *cstr,    /* Coordinate system string (returned) */
+        char   *cstr,   /* Coordinate system string (returned) */
         int    syswcs,  /* Coordinate system code */
         double equinox, /* Equinox of coordinate system */
         double epoch);  /* Epoch of coordinate system */
 
+%apply double *OUTPUT {
+  double opos[3]
+ }
+%typemap(in,numinputs=0) double opos[3] {
+  $1 = malloc(sizeof(double)*3);
+ }
+%typemap(argout) double opos[3] {
+  $result = rb_ary_new();
+  rb_ary_push($result, rb_float_new($1[0]));
+  rb_ary_push($result, rb_float_new($1[1]));
+  rb_ary_push($result, rb_float_new($1[2]));
+ }
+%typemap(freearg) double opos[3] {
+  free($1);
+ }
+
     void d2v3 (         /* Convert RA and Dec in degrees and distance to vector */
-        double  rra,    /* Right ascension in degrees */
-        double  rdec,   /* Declination in degrees */
-        double  r,      /* Distance to object in same units as pos */
-        double pos[3]); /* x,y,z geocentric equatorial position of object (returned) */
+        double rra,    /* Right ascension in degrees */
+        double rdec,   /* Declination in degrees */
+        double r,      /* Distance to object in same units as pos */
+        double opos[3]); /* x,y,z geocentric equatorial position of object (returned) */
 
     void s2v3 (         /* Convert RA and Dec in radians and distance to vector */
-        double  rra,    /* Right ascension in radians */
-        double  rdec,   /* Declination in radians */
-        double  r,      /* Distance to object in same units as pos */
-        double pos[3]); /* x,y,z geocentric equatorial position of object (returned) */
+        double rra,    /* Right ascension in radians */
+        double rdec,   /* Declination in radians */
+        double r,      /* Distance to object in same units as pos */
+        double opos[3]); /* x,y,z geocentric equatorial position of object (returned) */
 
 %apply double *OUTPUT {
         double  *rra,   /* Right ascension in degrees (returned) */
         double  *rdec,  /* Declination in degrees (returned) */
         double  *r      /* Distance to object in same units as pos (returned) */
+ }
+
+%apply double *INPUT {
+  double pos[3]
+ }
+
+%typemap(in) double pos[3] {
+  $1 = malloc(sizeof(double)*3);
+  $1[0] = NUM2DBL(RARRAY_PTR($input)[0]);
+  $1[1] = NUM2DBL(RARRAY_PTR($input)[2]);
+  $1[2] = NUM2DBL(RARRAY_PTR($input)[2]);
+ }
+%typemap(freearg) double pos[3] {
+  free($1);
  }
 
     void v2d3 (         /* Convert vector to RA and Dec in degrees and distance */
