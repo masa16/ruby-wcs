@@ -248,6 +248,7 @@ class WorldCoor
   # @param [Float] dec1  First latitude/declination in degrees
   # @param [Float] ra2  Second longitude/right ascension in degrees
   # @param [Float] dec2  Second latitude/declination in degrees
+  # @return [Float]
   def wcsdist(ra1,dec1,ra2,dec2)
     # This function is defined in C
   end
@@ -258,6 +259,7 @@ class WorldCoor
   # @param [Float] dec1  First latitude/declination in degrees
   # @param [Float] ra2  Second longitude/right ascension in degrees
   # @param [Float] dec2  Second latitude/declination in degrees
+  # @return [Float]
   def wcsdiff(ra1,dec1,ra2,dec2)
     # This function is defined in C
   end
@@ -265,6 +267,7 @@ class WorldCoor
   # Set WCS error message for later printing
   #
   # @param [String] errmsg  Error mesage < 80 char
+  # @return [String]
   def setwcserr(errmsg)
     # This function is defined in C
   end
@@ -276,6 +279,7 @@ class WorldCoor
   # Set flag to use AIPS WCS instead of WCSLIB
   #
   # @param [Integer] oldwcs  1 for AIPS WCS subroutines, else WCSLIB
+  # @return [String]
   def setdefwcs(oldwcs)
     # This function is defined in C
   end
@@ -296,6 +300,7 @@ class WorldCoor
   # Set filename for WCS error message
   #
   # @param [String] filename  FITS or IRAF file name
+  # @return [String]
   def setwcsfile(filename)
     # This function is defined in C
   end
@@ -304,6 +309,7 @@ class WorldCoor
   # Save output coordinate system
   #
   # @param [String] wcscoor  coordinate system (J2000, B1950, galactic)
+  # @return [String]
   def savewcscoor(wcscoor)
     # This function is defined in C
   end

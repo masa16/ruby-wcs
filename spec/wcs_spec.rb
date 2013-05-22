@@ -24,7 +24,7 @@ end
 
 RSpec::Matchers.define :be_close_to do |y|
   match do |x|
-    float_close(x,y)
+    float_close(x,y,1e-14)
   end
 end
 
@@ -317,6 +317,7 @@ describe "Wcs" do
   # @param [Float] dec1  First latitude/declination in degrees
   # @param [Float] ra2  Second longitude/right ascension in degrees
   # @param [Float] dec2  Second latitude/declination in degrees
+  # @return [Float]
   ra1 = 0
   dec1 = 0
   ra2 = 1
@@ -331,6 +332,7 @@ describe "Wcs" do
   # @param [Float] dec1  First latitude/declination in degrees
   # @param [Float] ra2  Second longitude/right ascension in degrees
   # @param [Float] dec2  Second latitude/declination in degrees
+  # @return [Float]
   describe Wcs.wcsdiff(ra1,dec1,ra2,dec2) do
     it{should be_close_to 1.4142404881141812}
   end
@@ -338,6 +340,7 @@ describe "Wcs" do
   # Set WCS error message for later printing
   #
   # @param [String] errmsg  Error mesage < 80 char
+  # @return [String]
   errmsg = "test message"
   describe Wcs.setwcserr(errmsg) do
     it{should == ""}
@@ -351,6 +354,7 @@ describe "Wcs" do
   # Set flag to use AIPS WCS instead of WCSLIB
   #
   # @param [Integer] oldwcs  1 for AIPS WCS subroutines, else WCSLIB
+  # @return [String]
   oldwcs = 0
   describe Wcs.setdefwcs(oldwcs) do
     it{should ==""}
@@ -374,6 +378,7 @@ describe "Wcs" do
   # Set filename for WCS error message
   #
   # @param [String] filename  FITS or IRAF file name
+  # @return [String]
   filename = 'test.dat'
   describe Wcs.setwcsfile(filename) do
     it{should == ''}
@@ -383,6 +388,7 @@ describe "Wcs" do
   # Save output coordinate system
   #
   # @param [String] wcscoor  coordinate system (J2000, B1950, galactic)
+  # @return [String]
   wcscoor = 'J2000'
   describe Wcs.savewcscoor(wcscoor) do
     it{should == ''}
@@ -520,7 +526,7 @@ describe "Wcs" do
   # @return [Integer]
   coorsys = 'J2000'
   describe Wcs.wcscsys(coorsys) do
-    it{should be_close_to 1}
+    it{should == 1}
   end
 
   # Set equinox from string
