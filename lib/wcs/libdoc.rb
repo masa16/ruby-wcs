@@ -122,11 +122,11 @@ class WorldCoor
 
   # Return image center and size in RA and Dec
   #
-  # @return [[cra,cdec,ora,odec]]
+  # @return [[cra,cdec,hwra,hwdec]]
   #  * cra:   Right ascension of image center (deg)
   #  * cdec:  Declination of image center (deg)
-  #  * dra:   Half-width in right ascension (deg)
-  #  * ddec:  Half-width in declination (deg)
+  #  * hwra:   Half-width in right ascension (deg)
+  #  * hwdec:  Half-width in declination (deg)
   def wcssize
     # This function is defined in C
   end
@@ -165,6 +165,7 @@ class WorldCoor
   # @param [Float] cdelt1  degrees/pixel in first axis (or both axes)
   # @param [Float] cdelt2  degrees/pixel in second axis if nonzero
   # @param [Array] pc  Rotation matrix, ignored if NULL
+  # @return [nil]
   def wcspcset(cdelt1,cdelt2,pc)
     # This function is defined in C
   end
