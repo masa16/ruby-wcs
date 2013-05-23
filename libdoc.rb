@@ -40,15 +40,16 @@ class WorldCoor
   #
   # @param [String] ctype1  FITS WCS projection for axis 1
   # @param [String] ctype2  FITS WCS projection for axis 2
+  # @return [Integer]
   def wcstype(ctype1,ctype2)
     # This function is defined in C
   end
 
-  # @return [Bool] Returns 1 if wcs structure set, else 0
+  # @return [Boolean] Returns 1 if wcs structure set, else 0
   def iswcs
   end
 
-  # @return [Bool] Returns 0 if wcs structure set, else 1
+  # @return [Boolean] Returns 0 if wcs structure set, else 1
   def nowcs
   end
 
@@ -98,6 +99,7 @@ class WorldCoor
   # @param [Float] cra  New center right ascension in degrees
   # @param [Float] cdec  New center declination in degrees
   # @param [String] coorsys  FK4 or FK5 coordinates (1950 or 2000)
+  # @return [nil]
   def wcsshift(cra,cdec,coorsys)
     # This function is defined in C
   end
@@ -105,10 +107,10 @@ class WorldCoor
   # Return RA and Dec of image center, size in degrees
   #
   # @return [[ra,dec,width,height]]
-  #  * ra:  Right ascension of image center (deg) (returned)
-  #  * dec:  Declination of image center (deg) (returned)
-  #  * width:  Width in degrees (returned)
-  #  * height:  Height in degrees (returned)
+  #  * ra:  Right ascension of image center (deg)
+  #  * dec:  Declination of image center (deg)
+  #  * width:  Width in degrees
+  #  * height:  Height in degrees
   def wcsfull
     # This function is defined in C
   end
@@ -121,10 +123,10 @@ class WorldCoor
   # Return image center and size in RA and Dec
   #
   # @return [[cra,cdec,ora,odec]]
-  #  * cra:   Right ascension of image center (deg) (returned)
-  #  * cdec:  Declination of image center (deg) (returned)
-  #  * dra:   Half-width in right ascension (deg) (returned)
-  #  * ddec:  Half-width in declination (deg) (returned)
+  #  * cra:   Right ascension of image center (deg)
+  #  * cdec:  Declination of image center (deg)
+  #  * dra:   Half-width in right ascension (deg)
+  #  * ddec:  Half-width in declination (deg)
   def wcssize
     # This function is defined in C
   end
@@ -132,10 +134,10 @@ class WorldCoor
   # Return min and max RA and Dec of image in degrees
   #
   # @return [[ra1,ra2,dec1,dec1]]
-  #  * ra1:   Min. right ascension of image (deg) (returned)
-  #  * ra2:   Max. right ascension of image (deg) (returned)
-  #  * dec1:  Min. declination of image (deg) (returned)
-  #  * dec2:  Max. declination of image (deg) (returned)
+  #  * ra1:   Min. right ascension of image (deg)
+  #  * ra2:   Max. right ascension of image (deg)
+  #  * dec1:  Min. declination of image (deg)
+  #  * dec2:  Max. declination of image (deg)
   def wcsrange
     # This function is defined in C
   end
@@ -143,6 +145,7 @@ class WorldCoor
   # Set scaling and rotation from CD matrix
   #
   # @param [Array] cd  CD matrix, (2x2 array) ignored if NULL
+  # @return [nil]
   def wcscdset(cd)
     # This function is defined in C
   end
@@ -152,6 +155,7 @@ class WorldCoor
   # @param [Float] cdelt1  degrees/pixel in first axis (or both axes)
   # @param [Float] cdelt2  degrees/pixel in second axis if nonzero
   # @param [Float] crota  Rotation counterclockwise in degrees
+  # @return [nil]
   def wcsdeltset(cdelt1,cdelt2,crota)
     # This function is defined in C
   end
@@ -172,6 +176,7 @@ class WorldCoor
   # Set output coordinate system for pix2wcs
   #
   # @param [String] coorsys  Coordinate system (B1950, J2000, etc)
+  # @return [nil]
   def wcsoutinit(coorsys)
     # This function is defined in C
   end
@@ -183,6 +188,7 @@ class WorldCoor
   # Set input coordinate system for wcs2pix
   #
   # @param [String] coorsys  Coordinate system (B1950, J2000, etc)
+  # @return [nil]
   def wcsininit(coorsys)
     # This function is defined in C
   end
@@ -194,6 +200,7 @@ class WorldCoor
   # Set WCS coordinate output format
   #
   # @param [Integer] degout  1= degrees, 0= hh:mm:ss dd:mm:ss
+  # @return [Integer]
   def setwcsdeg(degout)
     # This function is defined in C
   end
@@ -214,6 +221,7 @@ class WorldCoor
   # @param [Float] cdelt2  Vertical scale in degrees/pixel, ignored if cd is not NULL
   # @param [Float] crota  Rotation angle in degrees, ignored if cd is not NULL
   # @param [Array] cd  Rotation matrix, used if not NULL
+  # @return [Integer]
   def wcsreset(crpix1,crpix2,crval1,crval2,cdelt1,cdelt2,crota,cd)
     # This function is defined in C
   end
@@ -221,6 +229,7 @@ class WorldCoor
   # Change equinox of reference pixel coordinates in WCS
   #
   # @param [Float] equinox  Desired equinox as fractional year
+  # @return [nil]
   def wcseqset(equinox)
     # This function is defined in C
   end
@@ -228,6 +237,7 @@ class WorldCoor
   # Set pix2wcst() mode for LINEAR coordinates
   #
   # @param [Integer] mode  0: x y linear, 1: x units x units, 2: x y linear units
+  # @return [Integer]
   def setwcslin(mode)
   end
 
@@ -267,19 +277,20 @@ class WorldCoor
   # Set WCS error message for later printing
   #
   # @param [String] errmsg  Error mesage < 80 char
-  # @return [String]
+  # @return [nil]
   def setwcserr(errmsg)
     # This function is defined in C
   end
 
   # Print WCS error message to stderr
+  # @return [nil]
   def wcserr
   end
 
   # Set flag to use AIPS WCS instead of WCSLIB
   #
   # @param [Integer] oldwcs  1 for AIPS WCS subroutines, else WCSLIB
-  # @return [String]
+  # @return [nil]
   def setdefwcs(oldwcs)
     # This function is defined in C
   end
@@ -300,7 +311,7 @@ class WorldCoor
   # Set filename for WCS error message
   #
   # @param [String] filename  FITS or IRAF file name
-  # @return [String]
+  # @return [nil]
   def setwcsfile(filename)
     # This function is defined in C
   end
@@ -309,7 +320,7 @@ class WorldCoor
   # Save output coordinate system
   #
   # @param [String] wcscoor  coordinate system (J2000, B1950, galactic)
-  # @return [String]
+  # @return [nil]
   def savewcscoor(wcscoor)
     # This function is defined in C
   end
@@ -423,7 +434,7 @@ class WorldCoor
   # @param [Integer] syswcs  Coordinate system code
   # @param [Float] equinox  Equinox of coordinate system
   # @param [Float] epoch  Epoch of coordinate system
-  # @return [String]  Coordinate system string (returned)
+  # @return [String]  Coordinate system string
   def wcscstr(cstr,syswcs,equinox,epoch)
     # This function is defined in C
   end
@@ -452,9 +463,9 @@ class WorldCoor
   #
   # @param [Array] pos  x,y,z geocentric equatorial position of object
   # @return [[ra,dec,r]]
-  #   * ra:  Right ascension in degrees (returned)
-  #   * dec: Declination in degrees (returned)
-  #   * r:   Distance to object in same units as pos (returned)
+  #   * ra:  Right ascension in degrees
+  #   * dec: Declination in degrees
+  #   * r:   Distance to object in same units as pos
   def v2d3(pos)
     # This function is defined in C
   end
@@ -463,9 +474,9 @@ class WorldCoor
   #
   # @param [Array] pos  x,y,z geocentric equatorial position of object
   # @return [[ra,dec,r]]
-  #  * ra:  Right ascension in radians (returned)
-  #  * dec: Declination in radians (returned)
-  #  * r:   Distance to object in same units as pos (returned)
+  #  * ra:  Right ascension in radians
+  #  * dec: Declination in radians
+  #  * r:   Distance to object in same units as pos
   def v2s3(pos)
     # This function is defined in C
   end

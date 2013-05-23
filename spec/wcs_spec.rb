@@ -126,6 +126,7 @@ describe "Wcs::WorldCoor" do
   #
   # @param [String] ctype1  FITS WCS projection for axis 1
   # @param [String] ctype2  FITS WCS projection for axis 2
+  # @return [Integer]
   ctype1='TAN'
   ctype2='TAN'
   it {@wcs.wcstype(ctype1,ctype2).should == 0}
@@ -181,6 +182,7 @@ describe "Wcs::WorldCoor" do
   # @param [Float] cra  New center right ascension in degrees
   # @param [Float] cdec  New center declination in degrees
   # @param [String] coorsys  FK4 or FK5 coordinates (1950 or 2000)
+  # @return [nil]
   cra = 1.0
   cdec = 1.0
   coorsys = 'FK5'
@@ -219,6 +221,7 @@ describe "Wcs::WorldCoor" do
   # Set scaling and rotation from CD matrix
   #
   # @param [Array] cd  CD matrix, (2x2 array) ignored if NULL
+  # @return [nil]
   cd = [1,0,0,1]
   it {@wcs.wcscdset(cd).should == nil}
 
@@ -227,6 +230,7 @@ describe "Wcs::WorldCoor" do
   # @param [Float] cdelt1  degrees/pixel in first axis (or both axes)
   # @param [Float] cdelt2  degrees/pixel in second axis if nonzero
   # @param [Float] crota  Rotation counterclockwise in degrees
+  # @return [nil]
   cdelt1 = 0.001
   cdelt2 = 0.001
   crota = 0
@@ -246,6 +250,7 @@ describe "Wcs::WorldCoor" do
   # Set output coordinate system for pix2wcs
   #
   # @param [String] coorsys  Coordinate system (B1950, J2000, etc)
+  # @return [nil]
   coorsys = 'J2000'
   it {@wcs.wcsoutinit(coorsys).should == nil}
 
@@ -255,6 +260,7 @@ describe "Wcs::WorldCoor" do
   # Set input coordinate system for wcs2pix
   #
   # @param [String] coorsys  Coordinate system (B1950, J2000, etc)
+  # @return [nil]
   it {@wcs.wcsininit(coorsys).should == nil}
 
   # @return [String] Return current input coordinate system
@@ -263,6 +269,7 @@ describe "Wcs::WorldCoor" do
   # Set WCS coordinate output format
   #
   # @param [Integer] degout  1= degrees, 0= hh:mm:ss dd:mm:ss
+  # @return [Integer]
   degout = 1
   it {@wcs.setwcsdeg(degout).should == 0}
 
@@ -282,17 +289,30 @@ describe "Wcs::WorldCoor" do
   # @param [Float] cdelt2  Vertical scale in degrees/pixel, ignored if cd is not NULL
   # @param [Float] crota  Rotation angle in degrees, ignored if cd is not NULL
   # @param [Array] cd  Rotation matrix, used if not NULL
-  #it {@wcs.wcsreset(crpix1,crpix2,crval1,crval2,cdelt1,cdelt2,crota,cd).should == nil}
+  # @return [Integer]
+
+  crpix1  = 0    # /* Reference pixel coordinates */
+  crpix2  = 0    # /* Reference pixel coordinates */
+  crval1  = 0    # /* Coordinate at reference pixel in degrees */
+  crval2  = 0    # /* Coordinate at reference pixel in degrees */
+  cd      = nil  # /* Rotation matrix, used if not NULL */
+  cdelt1  = 0.1  # /* scale in degrees/pixel, if cd is NULL */
+  cdelt2  = 0.1  # /* scale in degrees/pixel, if cd is NULL */
+  crota   = 0    # /* Rotation angle in degrees, if cd is NULL */
+
+  it {@wcs.wcsreset(crpix1,crpix2,crval1,crval2,cdelt1,cdelt2,crota,cd).should == 0}
 
   # Change equinox of reference pixel coordinates in WCS
   #
   # @param [Float] equinox  Desired equinox as fractional year
+  # @return [nil]
   equinox = 2000
   it {@wcs.wcseqset(equinox).should == nil}
 
   # Set pix2wcst() mode for LINEAR coordinates
   #
   # @param [Integer] mode  0: x y linear, 1: x units x units, 2: x y linear units
+  # @return [Integer]
   mode = 0
   it {@wcs.setwcslin(mode).should == nil}
 
@@ -347,6 +367,7 @@ describe "Wcs" do
   end
 
   # Print WCS error message to stderr
+  # @return [nil]
   describe Wcs.wcserr do
     it{should == ""}
   end
