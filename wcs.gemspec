@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.email         = ["masa16.tanaka@gmail.com"]
   spec.description   = %q{WCSTools wrapper for Ruby. Provides calculation and conversion of sky positions in astronomical coordinates.}
   spec.summary       = %q{WCSTools wrapper for Ruby. Provides calculation and conversion of sky positions in astronomical coordinates.}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.homepage      = "https://github.com/masa16/ruby-wcs"
+  spec.license       = "LGPL"
   spec.extensions    = ["ext/extconf.rb"]
 
   spec.files         = `git ls-files`.split($/)
