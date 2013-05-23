@@ -23,7 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.rdoc_options = %w[
-    libdoc.rb
     --exclude doc/
     --exclude lib/wcs.so
     --exclude ext/
