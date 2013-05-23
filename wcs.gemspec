@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Wcs::VERSION
   spec.authors       = ["Masahiro TANAKA"]
   spec.email         = ["masa16.tanaka@gmail.com"]
-  spec.description   = %q{WCSTools wrapper for Ruby}
-  spec.summary       = %q{WCSTools wrapper for Ruby. Currently only wcs.c}
+  spec.description   = %q{WCSTools wrapper for Ruby. Provides calculation and conversion of sky positions in astronomical coordinates.}
+  spec.summary       = %q{WCSTools wrapper for Ruby. Provides calculation and conversion of sky positions in astronomical coordinates.}
   spec.homepage      = ""
   spec.license       = "MIT"
   spec.extensions    = ["ext/extconf.rb"]
