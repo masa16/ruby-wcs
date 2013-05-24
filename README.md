@@ -37,30 +37,37 @@ This is **NOT** WCSLIB wrapper.
 ## Usage
 
     require 'wcs'
-    naxis1  = 100  # Number of pixels along x-axis
-    naxis2  = 100  # Number of pixels along y-axis
-    ctype1  = "RA--TAN" #  FITS WCS projection for axis 1
-    ctype2  = "DEC-TAN" #  FITS WCS projection for axis 2
-    crpix1  = 0    # Reference pixel coordinates
-    crpix2  = 0    # Reference pixel coordinates
-    crval1  = 0    # Coordinate at reference pixel in degrees
-    crval2  = 0    # Coordinate at reference pixel in degrees
-    cd      = nil  # Rotation matrix, used if not NULL
-    cdelt1  = 0.1  # scale in degrees/pixel, if cd is NULL
-    cdelt2  = 0.1  # scale in degrees/pixel, if cd is NULL
-    crota   = 0    # Rotation angle in degrees, if cd is NULL
-    equinox = 2000 # Equinox of coordinates, 1950 and 2000 supported
-    epoch   = 2000 # Epoch of coordinates, for FK4/FK5 conversion
-
-    wcs = Wcs::WorldCoor.new(naxis1,naxis2,ctype1,ctype2,
-      crpix1,crpix2,crval1,crval2,cd,cdelt1,cdelt2,
-      crota,equinox,epoch)
-    xpix,ypix = wcs.wcs2pix(0.5,0.5)
-    xpos,ypos = wcs.pix2wcs(50,50)
 
     ra = 0
     dec = 0
     l,b = Wcs.wcscon(Wcs::J2000,Wcs::GALACTIC,0,0,ra,dec,2000)
+    #=> [96.33726964987589, -60.188551749437046]
+
+    naxis1  = 100       # Number of pixels along x-axis
+    naxis2  = 100       # Number of pixels along y-axis
+    ctype1  = "RA--TAN" #  FITS WCS projection for axis 1
+    ctype2  = "DEC-TAN" #  FITS WCS projection for axis 2
+    crpix1  = 0         # Reference pixel coordinates
+    crpix2  = 0         # Reference pixel coordinates
+    crval1  = 0         # Coordinate at reference pixel in degrees
+    crval2  = 0         # Coordinate at reference pixel in degrees
+    cd      = nil       # Rotation matrix, used if not NULL
+    cdelt1  = 0.1       # scale in degrees/pixel, if cd is NULL
+    cdelt2  = 0.1       # scale in degrees/pixel, if cd is NULL
+    crota   = 0         # Rotation angle in degrees, if cd is NULL
+    equinox = 2000      # Equinox of coordinates, 1950 and 2000 supported
+    epoch   = 2000      # Epoch of coordinates, for FK4/FK5 conversion
+
+    wcs = Wcs::WorldCoor.new(naxis1,naxis2,ctype1,ctype2,
+      crpix1,crpix2,crval1,crval2,cd,cdelt1,cdelt2,
+      crota,equinox,epoch)
+
+    xpix,ypix,offscl = wcs.wcs2pix(0.5,0.5)
+    #=> [5.000126927791313, 5.000317324553201, 0]
+
+    xpos,ypos = wcs.pix2wcs(12,34)
+    #=> [1.1998245865308625, 3.395274673610471]
+
 
 ## Platforms tested
 
