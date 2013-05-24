@@ -45,8 +45,8 @@ This is **NOT** WCSLIB wrapper.
 
     naxis1  = 100       # Number of pixels along x-axis
     naxis2  = 100       # Number of pixels along y-axis
-    ctype1  = "RA--TAN" #  FITS WCS projection for axis 1
-    ctype2  = "DEC-TAN" #  FITS WCS projection for axis 2
+    ctype1  = "RA--TAN" # FITS WCS projection for axis 1
+    ctype2  = "DEC-TAN" # FITS WCS projection for axis 2
     crpix1  = 0         # Reference pixel coordinates
     crpix2  = 0         # Reference pixel coordinates
     crval1  = 0         # Coordinate at reference pixel in degrees
