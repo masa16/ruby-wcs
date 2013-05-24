@@ -3,6 +3,8 @@
 [WCSTools](http://tdc-www.harvard.edu/wcstools/) wrapper for Ruby.
 Provides calculation and conversion of sky positions in astronomical coordinates.
 
+This is **NOT** WCSLIB wrapper.
+
 * [GitHub](https://github.com/masa16/ruby-wcs)
 * [RubyGems](https://rubygems.org/gems/wcs)
 * [Class Documentation](http://rubydoc.info/gems/wcs/frames/)
