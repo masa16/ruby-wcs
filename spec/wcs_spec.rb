@@ -406,20 +406,20 @@ describe "Wcs" do
   end
 
 
-  # Save output coordinate system
-  #
-  # @param [String] wcscoor  coordinate system (J2000, B1950, galactic)
-  # @return [String]
-  wcscoor = 'J2000'
-  describe Wcs.savewcscoor(wcscoor) do
-    it{should == ''}
-  end
-
-  # Return output coordinate system
-  # @return [String]
-  describe Wcs.getwcscoor do
-    it{should == 'J2000'}
-  end
+#  # Save output coordinate system
+#  #
+#  # @param [String] wcscoor  coordinate system (J2000, B1950, galactic)
+#  # @return [String]
+#  wcscoor = 'J2000'
+#  describe Wcs.savewcscoor(wcscoor) do
+#    it{should == ''}
+#  end
+#
+#  # Return output coordinate system
+#  # @return [String]
+#  describe Wcs.getwcscoor do
+#    it{should == 'J2000'}
+#  end
 
   # Convert from coordinate system sys1 to coordinate system sys2, converting
   # proper motions, too, and adding them if an epoch is specified
