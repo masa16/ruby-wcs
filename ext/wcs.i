@@ -415,10 +415,10 @@ typedef int BOOLEAN;
 //        char **header,  /* Pointer to start of FITS header */
 //        char *cwcs);    /* Keyword suffix character for output WCS */
 
-    void savewcscoor(   /* Save output coordinate system */
-        char *wcscoor); /* coordinate system (J2000, B1950, galactic) */
-
-    char *getwcscoor(void); /* Return output coordinate system */
+//    void savewcscoor(   /* Save output coordinate system */
+//        char *wcscoor); /* coordinate system (J2000, B1950, galactic) */
+//
+//    char *getwcscoor(void); /* Return output coordinate system */
 
 
     /* Coordinate conversion subroutines in wcscon.c */

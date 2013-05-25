@@ -304,7 +304,7 @@ class WorldCoor
   # Set third dimension for cube projections
   #
   # @param [Integer] izpix  Set coordinate in third dimension (face)
-  # @return [Integer]
+  # @return [Integer] saved izpix
   def wcszin(izpix)
     # This function is defined in C
   end
@@ -318,24 +318,24 @@ class WorldCoor
   end
 
 
-  # Save output coordinate system
-  #
-  # @param [String] wcscoor  coordinate system (J2000, B1950, galactic)
-  # @return [nil]
-  def savewcscoor(wcscoor)
-    # This function is defined in C
-  end
-
-  # Return output coordinate system
-  # @return [String]
-  def getwcscoor
-  end
+#  # Save output coordinate system
+#  #
+#  # @param [String] wcscoor  coordinate system (J2000, B1950, galactic)
+#  # @return [nil]
+#  def savewcscoor(wcscoor)
+#    # This function is defined in C
+#  end
+#
+#  # Return output coordinate system
+#  # @return [String]
+#  def getwcscoor
+#  end
 
   # Convert from coordinate system sys1 to coordinate system sys2, converting
   # proper motions, too, and adding them if an epoch is specified
   #
-  # @param [Integer] sys1  Input coordinate system (J2000, B1950, ECLIPTIC, GALACTIC
-  # @param [Integer] sys2  Output coordinate system (J2000, B1950, ECLIPTIC, G ALACTIC
+  # @param [Integer] sys1  Input coordinate system (J2000, B1950, ECLIPTIC, GALACTIC)
+  # @param [Integer] sys2  Output coordinate system (J2000, B1950, ECLIPTIC, GALACTIC)
   # @param [Float] eq1  Input equinox (default of sys1 if 0.0)
   # @param [Float] eq2  Output equinox (default of sys2 if 0.0)
   # @param [Float] ep1  Input Besselian epoch in years
@@ -360,8 +360,8 @@ class WorldCoor
   # Convert from coordinate system sys1 to coordinate system sys2, converting
   # proper motions, too, and adding them if an epoch is specified
   #
-  # @param [Integer] sys1   Input coordinate system (J2000, B1950, ECLIPTIC, GALACTIC
-  # @param [Integer] sys2   Output coordinate system (J2000, B1950, ECLIPTIC, GALACTIC
+  # @param [Integer] sys1   Input coordinate system (J2000, B1950, ECLIPTIC, GALACTIC)
+  # @param [Integer] sys2   Output coordinate system (J2000, B1950, ECLIPTIC, GALACTIC)
   # @param [Float] eq1    Input equinox (default of sys1 if 0.0)
   # @param [Float] eq2    Output equinox (default of sys2 if 0.0)
   # @param [Float] ep1    Input Besselian epoch in years (for proper motion)
@@ -380,8 +380,8 @@ class WorldCoor
 
   # Convert between coordinate systems and equinoxes
   #
-  # @param [Integer] sys1  Input coordinate system (J2000, B1950, ECLIPTIC, GALACTIC
-  # @param [Integer] sys2  Output coordinate system (J2000, B1950, ECLIPTIC, G ALACTIC
+  # @param [Integer] sys1  Input coordinate system (J2000, B1950, ECLIPTIC, GALACTIC)
+  # @param [Integer] sys2  Output coordinate system (J2000, B1950, ECLIPTIC, GALACTIC)
   # @param [Float] eq1  Input equinox (default of sys1 if 0.0)
   # @param [Float] eq2  Output equinox (default of sys2 if 0.0)
   # @param [Float] dtheta  Longitude or right ascension in degrees
