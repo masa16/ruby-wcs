@@ -1,9 +1,9 @@
 # Ruby/WCS
 
-Ruby/WCS is a Ruby wrapper of [WCSTools](http://tdc-www.harvard.edu/wcstools/).
+Ruby wrapper of [WCSTools](http://tdc-www.harvard.edu/wcstools/).
 Provides calculation and conversion of sky positions in astronomical coordinates.
 
-This is **NOT** WCSLIB wrapper.
+This is **NOT** [WCSLIB](http://www.atnf.csiro.au/people/mcalabre/WCS/wcslib/) wrapper.
 
 * [GitHub](https://github.com/masa16/ruby-wcs)
 * [RubyGems](https://rubygems.org/gems/wcs)
