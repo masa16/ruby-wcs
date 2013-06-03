@@ -1,6 +1,6 @@
 # Ruby/WCS
 
-Ruby wrapper of [WCSTools](http://tdc-www.harvard.edu/wcstools/).
+Ruby wrapper of [WCSTools](http://tdc-www.harvard.edu/wcstools/) using SWIG.
 Provides calculation and conversion of sky positions in astronomical coordinates.
 
 This is **NOT** [WCSLIB](http://www.atnf.csiro.au/people/mcalabre/WCS/wcslib/) wrapper.
