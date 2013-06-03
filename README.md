@@ -25,6 +25,13 @@ This is **NOT** [WCSLIB](http://www.atnf.csiro.au/people/mcalabre/WCS/wcslib/) w
 
         $ ruby setup.rb
 
+    If WCSTools is installed at non-default directoriy:
+
+        $ ruby setup.rb all -- --with-wcs-dir=/usr/local/wcstools
+
+        $ gem install wcs -- --with-wcs-include=/usr/local/include \
+          --with-wcs-lib=/usr/local/lib
+
     Or add this line to your application's Gemfile:
 
         gem 'wcs'

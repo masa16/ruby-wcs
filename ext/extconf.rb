@@ -1,9 +1,9 @@
 require "mkmf"
 
 # configure options:
-#  --with-metis-dir=path
-#  --with-metis-include=path
-#  --with-metis-lib=path
+#  --with-wcs-dir=path
+#  --with-wcs-include=path
+#  --with-wcs-lib=path
 
 dir_config("wcs")
 exit unless have_header("wcs/wcs.h")
